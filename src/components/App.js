@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
-import { Box } from './Box.styled';
+
+import Statistics from './Statistics/Statistics';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import Section from './SectionTitle/SectionTitle';
 
 class App extends Component {
   state = {
@@ -9,84 +12,40 @@ class App extends Component {
     bad: 0,
   };
 
-  total = 0;
+  onLeaveFeedback = label => {
+    this.setState(prevState => {
+      return { [label]: prevState[label] + 1 };
+    });
+  };
 
   countTotalFeedback = () => {
-    const values = Object.values(this.state);
-    this.total = values.reduce((acc, number) => {
+    return Object.values(this.state).reduce((acc, number) => {
       return acc + number;
-    }, 1);
+    }, 0);
   };
 
-  handleFeedbackButton = event => {
-    const buttonName = event.target.dataset.name;
-    switch (buttonName) {
-      case 'good':
-        this.setState(prevState => {
-          return {
-            good: prevState.good + 1,
-          };
-        });
-        break;
-
-      case 'neutral':
-        this.setState(prevState => {
-          return {
-            neutral: prevState.neutral + 1,
-          };
-        });
-        break;
-
-      case 'bad':
-        this.setState(prevState => {
-          return {
-            bad: prevState.bad + 1,
-          };
-        });
-        break;
-
-      default:
-        console.log('Mistake');
-    }
-    this.countTotalFeedback();
+  countPositiveFeedbackPercentage = () => {
+    const total = this.countTotalFeedback();
+    return total > 0 ? Math.round((this.state.good / total) * 100) : 0;
   };
-
-  // countPositiveFeedbackPercentage;
 
   render() {
     return (
       <>
         <GlobalStyle />
-        <h2>Please leave feedback</h2>
-        <Box>
-          <button
-            type="button"
-            data-name="good"
-            onClick={this.handleFeedbackButton}
-          >
-            Good
-          </button>
-          <button
-            type="button"
-            data-name="neutral"
-            onClick={this.handleFeedbackButton}
-          >
-            Neutral
-          </button>
-          <button
-            type="button"
-            data-name="bad"
-            onClick={this.handleFeedbackButton}
-          >
-            Bad
-          </button>
-        </Box>
-        <h2>Statistics</h2>
-        <p>Good: {this.state.good}</p>
-        <p>Neutral: {this.state.neutral} </p>
-        <p>Bad: {this.state.bad}</p>
-        <p>Total: {this.total}</p>
-        <p>Positive feedback: </p>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        </Section>
+        <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
+        />
       </>
     );
   }

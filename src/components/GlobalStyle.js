@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 body {
   margin: ${p => p.theme.space[0]}px;
-  padding: ${p => p.theme.space[0]}px;
+  padding: ${p => p.theme.space[5]}px;
   background-color: #fff;
   color: #2a2a2a;
   line-height: 1.3;
