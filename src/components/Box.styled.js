@@ -12,10 +12,6 @@ import {
 } from 'styled-system';
 
 export const Box = styled.div(
-  {
-    display: 'flex',
-    alignItems: 'center',
-  },
   color,
   space,
   layout,
