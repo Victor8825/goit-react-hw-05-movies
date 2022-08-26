@@ -9,6 +9,7 @@ const modalRoot = document.querySelector('#modal-root');
 export default class Modal extends Component {
   static propTypes = {
     closeModal: PropTypes.func.isRequired,
+    children: PropTypes.node,
   };
 
   componentDidMount() {
