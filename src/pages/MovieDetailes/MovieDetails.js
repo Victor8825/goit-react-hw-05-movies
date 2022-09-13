@@ -1,4 +1,4 @@
-import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fetchMovieById, BASE_IMG_URL } from 'components/Utils/fetchMovies';
 import { Box } from 'components/General/Box.styled';
