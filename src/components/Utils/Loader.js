@@ -1,5 +1,5 @@
 import { ThreeCircles } from 'react-loader-spinner';
-import { Box } from '../Box.styled';
+import { Box } from '../General/Box.styled';
 
 export const Loader = () => (
   <Box
