@@ -26,7 +26,6 @@ const Movies = () => {
 
   useEffect(() => {
     if (query === '') {
-      console.log('nothing happen');
       return;
     }
     fetchMovieByInput(query)

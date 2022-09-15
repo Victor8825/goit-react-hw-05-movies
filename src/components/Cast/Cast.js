@@ -15,20 +15,24 @@ const Cast = () => {
   const dummyImg = `https://dummyimage.com/100x200/000/fff&text=NO+IMAGE`;
   return (
     <StyledCast>
-      {actors.map(({ profile_path: poster, name, character, cast_id }) => (
-        <li key={cast_id}>
-          <img
-            src={`${poster ? BASE_IMG_URL + poster : dummyImg}`}
-            alt={name}
-            width="100"
-            height="200"
-          />
-          <p>
-            <b>{name}</b>
-          </p>
-          <p>Character: {character}</p>
-        </li>
-      ))}
+      {!actors.length > 0 ? (
+        <h3>There are no cast info!</h3>
+      ) : (
+        actors.map(({ profile_path: poster, name, character, cast_id }) => (
+          <li key={cast_id}>
+            <img
+              src={`${poster ? BASE_IMG_URL + poster : dummyImg}`}
+              alt={name}
+              width="100"
+              height="200"
+            />
+            <p>
+              <b>{name}</b>
+            </p>
+            <p>Character: {character}</p>
+          </li>
+        ))
+      )}
     </StyledCast>
   );
 };
